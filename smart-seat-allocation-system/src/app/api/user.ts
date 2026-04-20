@@ -1,5 +1,6 @@
-
-export const createUser = async (userData: { username: string; firstName: string; lastName: string }) => {
+import { ApiResponse } from "@/src/types/api";
+    
+export const createUser = async (userData: { username: string; firstName: string; lastName: string }): Promise<ApiResponse> => {
   const response = await fetch(`/api/users`, {
     method: "POST",
     headers: {
@@ -10,17 +11,17 @@ export const createUser = async (userData: { username: string; firstName: string
   return response.json();
 };
 
-export const getUser = async (userId: string) => {
+export const getUser = async (userId: string): Promise<ApiResponse> => {
   const response = await fetch(`/api/users/${userId}`);
   return response.json();
 };
 
-export const getUsers = async () => {
+export const getUsers = async (): Promise<ApiResponse> => {
   const response = await fetch(`/api/users`);
   return response.json();
 };
 
-export const updateUser = async (userId: string, userData: { username?: string; firstName?: string; lastName?: string }) => {
+export const updateUser = async (userId: string, userData: { username?: string; firstName?: string; lastName?: string }): Promise<ApiResponse> => {
   const response = await fetch(`/api/users/${userId}`, {
     method: "PUT",  
     headers: {
@@ -31,7 +32,7 @@ export const updateUser = async (userId: string, userData: { username?: string; 
   return response.json();
 };
 
-export const deleteUser = async (userId: string) => {
+export const deleteUser = async (userId: string): Promise<ApiResponse> => {
   const response = await fetch(`/api/users/${userId}`, {
     method: "DELETE",
   });
