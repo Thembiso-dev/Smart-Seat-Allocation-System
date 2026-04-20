@@ -38,81 +38,132 @@ const Dashboard = () => {
   ]
 
   return (
-    <div className='flex min-w-screen h-screen'>
+    <div className="flex min-w-screen h-screen bg-white font-sans">
       {/* Sidebar */}
-      <aside className='w-64 h-full bg-gray-200 p-4 text-black flex flex-col'>
-        <div className='profileInfo text-center'>
-          <img src="#" alt="Profile" className='w-40 h-40 rounded-full mb-4 mx-auto bg-gray-400 mt-15' />
+      <aside className="w-64 h-full bg-[#EFEFEF] border-r border-gray-200 px-6 py-8 text-gray-900 flex flex-col">
+        <div className="profileInfo text-center mb-6">
+          <div className="profileImage w-32 h-32 rounded-full mb-4 mx-auto bg-gray-300 p-5 font-bold text-2xl text-gray-700 flex items-center justify-center">
+            Smart Seats
+          </div>
+          {/* <img
+            src="#"
+            alt="Smart Seats"
+            className="w-32 h-32 rounded-full mb-4 mx-auto bg-gray-300"
+          /> */}
+          <p className="text-sm font-medium text-gray-800">SmartSeats user</p>
+          <p className="text-xs text-gray-400 mt-1">Training coordinator</p>
         </div>
-        <div className="moreInfo">
-          <button className='cursor-pointer underline text-black/50 pl-30 rounded text-left right-0'>
+
+        <div className="moreInfo mt-4">
+          <button className="cursor-pointer text-xs font-medium text-gray-500 hover:text-gray-900 underline">
             More Info
           </button>
         </div>
+
         <div className="logoutBtn mt-auto">
-          <button className='cursor-pointer w-full bg-red-500 text-white py-2 rounded'>
+          <button className="cursor-pointer w-full bg-[#111] hover:bg-[#333] text-white py-2.5 rounded-xl text-sm font-medium transition-colors">
             Logout
           </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className='flex-1 p-6 bg-gray-50 overflow-auto'>
+      <main className="flex-1 bg-white overflow-auto">
         {/* Header */}
-        <div className="dashboardHeader flex justify-between items-center mb-6 border-b border-black/50 pb-4 h-[10dvh]">
-          <h1 className='text-3xl font-bold text-gray-800'>Dashboard</h1>
-          <div className='text-2xl font-bold text-gray-700'>DerivCo</div>
+        <div className="dashboardHeader flex items-center justify-between px-8 py-4 border-b border-gray-200 h-[10dvh]">
+          <h1 className="text-2xl font-medium tracking-tight text-gray-900">
+            Dashboard
+          </h1>
+          <div className="text-sm font-medium tracking-tight text-gray-400">
+            SmartSeats · Training Allocation Platform
+          </div>
         </div>
 
         {/* Dashboard Content - 3 column grid */}
-        <div className="dashboardContent grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-25">
-          {sessions.map((session) => (
-            <div key={session.id} className='sessionCard bg-white rounded-lg shadow-md overflow-hidden'>
-              {/* Session Title */}
-              <div className='bg-gray-800 text-white p-3'>
-                <h2 className='text-xl font-semibold'>{session.title}</h2>
-              </div>
-              
-              {/* Session Details */}
-              <div className='p-4 space-y-2'>
-                <div className='flex justify-between'>
-                  <span className='text-gray-600'>Type:</span>
-                  <span className='font-medium text-gray-600'>{session.type}</span>
-                </div>
-                <div className='flex justify-between'>
-                  <span className='text-gray-600'>Slot start:</span>
-                  <span className='font-medium text-gray-600'>{session.slotStart}</span>
-                </div>
-                <div className='flex justify-between'>
-                  <span className='text-gray-600'>Slot end:</span>
-                  <span className='font-medium text-gray-600'>{session.slotEnd}</span>
-                </div>
-                <div className='flex justify-between'>
-                  <span className='text-gray-600'>Capacity:</span>
-                  <span className='font-medium text-gray-600'>{session.capacity}</span>
-                </div>
-                <div className='flex justify-between'>
-                  <span className='text-gray-600'>Notes:</span>
-                  <span className='font-medium text-gray-600'>{session.notes}</span>
-                </div>
-                <div className='flex justify-between'>
-                  <span className='text-gray-600'>Booked Seats:</span>
-                  <span className='font-medium text-orange-600'>{session.bookedSeats}</span>
-                </div>
-                <div className='flex justify-between'>
-                  <span className='text-gray-600'>Available seats:</span>
-                  <span className='font-medium text-green-600'>{session.availableSeats}</span>
-                </div>
-              </div>
-              
-              {/* Full Details Button */}
-              <div className='p-4 pt-0'>
-                <button className='w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors'>
-                  full details
-                </button>
-              </div>
+        <div className="dashboardContent px-8 py-8 bg-[#EFEFEF] min-h-[calc(100vh-10dvh)]">
+          <div className="max-w-5xl mx-auto">
+            <div className="mb-6">
+              <span className="text-[11px] font-medium tracking-widest uppercase text-gray-400 border border-gray-300 rounded-md px-3 py-1 inline-block mb-4">
+                Sessions overview
+              </span>
+              <p className="text-sm text-gray-500">
+                Live view of today&apos;s training sessions, including capacity,
+                bookings, and remaining seats.
+              </p>
             </div>
-          ))}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {sessions.map((session) => (
+                <div
+                  key={session.id}
+                  className="sessionCard bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col"
+                >
+                  {/* Session Title */}
+                  <div className="bg-white px-5 pt-4 pb-3 border-b border-gray-100">
+                    <h2 className="text-[15px] font-medium text-gray-900">
+                      {session.title}
+                    </h2>
+                    <p className="text-[11px] text-gray-400 mt-1">
+                      {session.type} · {session.slotStart}–{session.slotEnd}
+                    </p>
+                  </div>
+
+                  {/* Session Details */}
+                  <div className="p-5 space-y-2 text-sm flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Type</span>
+                      <span className="font-medium text-gray-700">
+                        {session.type}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Slot start</span>
+                      <span className="font-medium text-gray-700">
+                        {session.slotStart}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Slot end</span>
+                      <span className="font-medium text-gray-700">
+                        {session.slotEnd}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Capacity</span>
+                      <span className="font-medium text-gray-700">
+                        {session.capacity}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Notes</span>
+                      <span className="font-medium text-gray-700">
+                        {session.notes}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Booked seats</span>
+                      <span className="font-medium text-orange-500">
+                        {session.bookedSeats}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Available seats</span>
+                      <span className="font-medium text-green-600">
+                        {session.availableSeats}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Full Details Button */}
+                  <div className="px-5 pb-4 pt-0">
+                    <button className="w-full h-10 rounded-xl bg-[#111] hover:bg-[#333] text-white text-sm font-medium flex items-center justify-center transition-colors">
+                      Book Session
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </main>
     </div>
